@@ -1,11 +1,15 @@
 import React from "react"
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect, useHistory } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 
-export const Rare = () => (
+
+
+export const Rare = () => {
+    const history = useHistory()
+        return(
     <>
         <Route render={() => {
             if (localStorage.getItem("rare_user_id")) {
@@ -30,8 +34,10 @@ export const Rare = () => (
             if (localStorage.getItem("rare_user_id")) {
                 return <Redirect to="/" />
             } else {
-                return <Register />
+                return <Register history = {history}/>
             }
         }} />
-    </>
-)
+    
+    </>)
+        
+}
