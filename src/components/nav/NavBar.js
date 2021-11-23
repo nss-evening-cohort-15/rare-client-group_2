@@ -9,10 +9,13 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item">
-                <img className="navbar__logo" src={Logo} />
+                <img className="navbar__logo" src={Logo} alt='logo'/>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/">Posts</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/categories">Categories</Link>
             </li>
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
