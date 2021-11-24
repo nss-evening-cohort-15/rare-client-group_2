@@ -12,20 +12,27 @@ export const CategoryList = () => {
         getCategories().then((data) => setCategories(data))
     }, [])
 
+    const history = useHistory()
+
     return(
+        <>
         <div className='categories'>
             <h2 className='categories_title'>Categories</h2>
             <ul className='categories_list'>
                 {
                 categories.map(category => {
                     return (
-                        <li>{category.label}</li>
+                        <li>
+                            {category.label}
+                            <button className='categories_edit' 
+                            onClick={() => {history.push(`/categories/edit/${category.id}`)}}>Edit</button>
+                        </li>
                     )
                 })
                 }
             </ul>
-
         </div>
+    </>
     )
 
 
