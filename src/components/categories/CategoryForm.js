@@ -52,6 +52,7 @@ export const CategoryForm = () => {
                 </fieldset>
             </form>
             <button className='category_edit--save' onClick={handleSaveEdit}>Save</button>
+            <button className='category_edit--cancel' onClick={() => {history.push('/categories')}}>Cancel</button>
         </div>
     )
 }
