@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { deleteCategory, getCategories } from "./CategoryManager"
 // import "./Categories.css"
 
@@ -7,9 +7,6 @@ import { deleteCategory, getCategories } from "./CategoryManager"
 export const CategoryList = () => {
 
     const [categories, setCategories] = useState([])
-    const history = useHistory()
-    const {category_id} = useParams()
-    const [category, setCategory] = useState([])
     
     const handleDelete = (id) => {
         deleteCategory(id)

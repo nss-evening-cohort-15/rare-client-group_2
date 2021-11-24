@@ -19,6 +19,7 @@ export const deleteCategory = (category_id) => {
         method: "DELETE"
     })
         .then(getCategories)
+}
   
 export const editCategories = (category) => {
     return fetch(`http://localhost:8088/categories/${category.id}`, {
