@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { createNewComment } from "./CommentManager"
 import { useParams, useHistory } from 'react-router-dom'
 
 export const CommentForm = () => {
    
-    const { addComment, newComment, getComments, getUserById } = useContext
     const [ isLoading, setIsLoading ] = useState(false);
-    const [user, setUser] = useState({});
+    const [user, getComments, addComment, setUser] = useState({});
 
     const [comment, setComment ] = useState({
         post_id: 2,
@@ -33,7 +32,6 @@ export const CommentForm = () => {
     }
 
     const createNewComment = (event) => {
-        event.preventDefault()
         setIsLoading(false)
         if (!comment === 0 || !comment === 0) {
 
@@ -48,7 +46,7 @@ export const CommentForm = () => {
                     created_on: Date.now()
                 }
 
-                addComment(newComment)
+                createNewComment(newComment)
                     .then(() => {
                         history.push('/comments')
                         setIsLoading(false)
