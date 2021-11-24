@@ -4,7 +4,8 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-
+import { CommentDetail } from "./comment/CommentDetail"
+import { CommentForm } from "./comment/CommentForm"
 
 
 export const Rare = () => {
@@ -15,6 +16,8 @@ export const Rare = () => {
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <NavBar />
+                    <CommentForm />
+                    <CommentDetail />
                     <ApplicationViews />
                 </>
             } else {

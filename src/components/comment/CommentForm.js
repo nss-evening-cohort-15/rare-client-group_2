@@ -1,83 +1,78 @@
-import React, { useState, useEffect } from "react"
-import { addComment } from "./CommentManager"
+import React, { useState, useEffect, useContext } from "react"
+import { createNewComment } from "./CommentManager"
 import { useParams, useHistory } from 'react-router-dom'
 
 export const CommentForm = () => {
-    // Use the required context providers for data
-    const { commentId } = useParams()
-    // Component state
-    const [comment, setComment] = useState({})
-    const history = useHistory()
+   
+    const { addComment, newComment, getComments, getUserById } = useContext
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [user, setUser] = useState({});
 
-    // Is there a a URL parameter??
-    const editMode = commentId ? true : false  // true or false
+    const [comment, setComment ] = useState({
+        post_id: 2,
+        author_id: 1,
+        content: "",
+        created_on: null,
+    });
+    const {commentId} = useParams();
+    const history = useHistory()
+    
+
+    useEffect(() => {
+        getComments()
+      }, [])
+
 
     const handleControlledInputChange = (event) => {
-        /*
-            When changing a state object or array, always create a new one
-            and change state instead of modifying current one
-        */
-        const newComment = Object.assign({}, comment)          // Create copy
-        newComment[event.target.id = event.target.value]    // Modify copy
-        setComment(newComment)                               // Set copy as new state
+
+        const newComment = { ...comment }
+
+        newComment[event.target.id] = event.target.value
+
+        setComment(newComment)
     }
 
-    // Get comments from API when component initializes
-    useEffect(() => {
-        if (editMode) {
-            getCommentById(commentId).then((res) => {
-                setComment(res)
-            })
-        
+    const createNewComment = (event) => {
+        event.preventDefault()
+        setIsLoading(false)
+        if (!comment === 0 || !comment === 0) {
 
-    const createNewComment = () => {
-        const userId = parseInt(comment.id)
-
-        if (userId === 0) {
-            window.alert("Please select a user")
-        }
+            window.alert("Create New Comment")
+        }   
             else {
                 // POST
-                addComment({
-                    id: comment.id,
+                const newComment = {
                     post_id: comment.post_id,
-                    author_Id: comment.author_id,
-                    content: comment.content
-                })
-                    .then(() => history.push("/comments"))
-            }
+                    author_id: comment.author_id,
+                    content: comment.text,
+                    created_on: Date.now()
+                }
+
+                addComment(newComment)
+                    .then(() => {
+                        history.push('/comments')
+                        setIsLoading(false)
+                    })
+            
         }
     }
 
     return (
-        <form className="animalForm">
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Comment: </label>
-                    <input type="text" name="comment" required autoFocus className="form-control"
-                        placeholder="add comment here"
-                        defaultValue={comment.content}
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-            <div className="form-group">
-                    <label htmlFor="comment">Comment: </label>
-                    <textarea type="text" name="comment" className="form-control"
-                        value={comment.content}
-                        onChange={handleControlledInputChange}>
-                    </textarea>
-                </div>
-            </fieldset>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault()
-                    createNewComment()
-                }}
-                className="btn btn-primary">
-                {/* {editMode ? "Save Updates" : "Add Comment"} */}
-            </button>
-        </form>
+        <form className="comment">
+            <h1 className="comment_title">Comments</h1>
+            
+            <fieldset className="comment__form">
+          <label htmlFor="text">
+              <input type="text" id="text" required autoFocus className="form-control" Textarea
+              placeholder="type comment here" style= {{ minHeight:50}} value={comment.text} 
+              onChange={handleControlledInputChange} />
+              </label>
+          </fieldset>
+          <button className="btn btn-primary" 
+             disabled={isLoading}
+             onClick={event => createNewComment(event)}>
+           {commentId ? <>Save Comment</> : <>Add Comment</>}
+           </button>
+          </form>
     )
-})}
+            }
