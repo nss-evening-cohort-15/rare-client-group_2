@@ -1,5 +1,5 @@
 
-export const getPost = () => {
+export const getPosts = () => {
   return fetch("http://localhost:8088/posts")
     .then(res => res.json())
 }
@@ -12,5 +12,5 @@ export const addPost = post => {
     },
     body: JSON.stringify(post)
   })
-    .then(getPost)
+    .then(getPosts)
 }

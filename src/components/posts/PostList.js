@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import  {getPost} from "./PostManager";
+import  {getPosts} from "./PostManager";
 
 export const PostList = () => {
   const [ posts, setPosts] = useState([])
   // const history = useHistory()
 
   useEffect(() => {
-    getPost().then(postsData => setPosts(postsData))
+    getPosts().then(postsData => setPosts(postsData))
   }, [])
 
   return(
@@ -18,10 +18,7 @@ export const PostList = () => {
           posts.map(post => {
             return <section key={post.id}>
               <ul>
-              {/* <Link to={`/posts/${post.id}`}> */}
-                <h3>{post.title}</h3>
-                <p>Posted by user #{post.user_id}</p>
-              {/* </Link> */}
+                <Link to={`/posts/${post.id}`}>{post.title}</Link><br/>
               </ul>
             </section>
           })
