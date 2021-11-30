@@ -5,6 +5,10 @@ import { CategoryCreate } from "./categories/CategoryCreate"
 import { CategoryForm } from "./categories/CategoryForm"
 import { PostList } from "./posts/PostList"
 import { PostDetail } from './posts/PostDetail'
+import { TagList } from "./tags/TagList"
+import { TagForm } from "./tags/TagForm"
+import { TagDetail } from "./tags/TagDetail"
+import { MyPosts } from './posts/MyPosts'
 
 export const ApplicationViews = () => {
     return <>
@@ -36,7 +40,20 @@ export const ApplicationViews = () => {
             <Route path='/posts/:postId(\d+)'>
                 <PostDetail />
             </Route>
+
+            <Route path='/myposts'>
+                <MyPosts />
+            </Route>
             
+            <Route exact path='/tags'>
+                <TagList />
+            </Route>
+            <Route path='/tags/create'>
+                <TagDetail />
+            </Route>
+            <Route path='/tags/edit/:tagId(\d+)'>
+                <TagForm />
+            </Route>
         </main>
     </>
 }

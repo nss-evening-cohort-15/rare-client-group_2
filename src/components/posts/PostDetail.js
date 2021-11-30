@@ -22,8 +22,8 @@ export const PostDetail = () => {
 
     return (
         <div className='post_detail'>
-            <h3>{post.title}</h3>
-            <img src={post.image_url} alt='post_image' className='post_detail_title'/>
+            <h3 className='post_detail_title'>{post.title}</h3>
+            <img src={post.image_url} alt='post_image' className='post_detail_img'/>
             <p className='post_detail_date'>Posted on {post.publication_date}</p>
             <p className='post_detail_user'>Posted by user {post.user.username}</p>
 
