@@ -33,8 +33,10 @@ export const Rare = () => {
             if (localStorage.getItem("rare_user_id")) {
                 return <Redirect to="/" />
             } else {
-                return <Register />
+                return <Register history = {history}/>
             }
         }} />
+    
     </>)
+        
 }

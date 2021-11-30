@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link} from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -13,7 +13,6 @@ export const Register = (props) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
                 "username": email.current.value,
