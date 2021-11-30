@@ -8,6 +8,7 @@ import { PostDetail } from './posts/PostDetail'
 import { TagList } from "./tags/TagList"
 import { TagForm } from "./tags/TagForm"
 import { TagDetail } from "./tags/TagDetail"
+import { MyPosts } from './posts/MyPosts'
 
 export const ApplicationViews = () => {
     return <>
@@ -38,6 +39,10 @@ export const ApplicationViews = () => {
 
             <Route path='/posts/:postId(\d+)'>
                 <PostDetail />
+            </Route>
+
+            <Route path='/myposts'>
+                <MyPosts />
             </Route>
             
             <Route exact path='/tags'>
