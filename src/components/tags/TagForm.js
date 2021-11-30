@@ -1,57 +1,57 @@
 import React, { useState, useEffect } from "react"
 import { useParams, useHistory } from "react-router"
-import { getCategories, editCategories } from "./CategoryManager"
+import { getTags, editTags } from "./TagManager"
 
-export const CategoryForm = () => {
+export const TagForm = () => {
     const history = useHistory()
     
-    const [categories, setCategories] = useState([])
-    const [theCategory, setTheCategory] = useState({label: ''})
-    const [newCategory, setNewCategory] = useState({})
+    const [tags, setTags] = useState([])
+    const [tag, setTag] = useState({label: ''})
+    const [newTag, setNewTag] = useState({})
 
-    const { categoryId } = useParams()
+    const { tagId } = useParams()
 
     useEffect(() => {
-        getCategories().then((data) => setCategories(data))
+        getTags().then((data) => setTags(data))
     }, [])
 
     useEffect(() => {
-        const theCategory = categories.find(category => category.id === parseInt(categoryId)) || {label: ''}
-        setTheCategory(theCategory)
-    }, [categories, categoryId])
+        const tag = tags.find(tag => tag.id === parseInt(tagId)) || {label: ''}
+        setTag(tag)
+    }, [tags, tagId])
 
 
     const handleControlledInputChange = (event) => {
-        newCategory[event.target.name] = event.target.value
-        setNewCategory(newCategory)
+        newTag[event.target.name] = event.target.value
+        setNewTag(newTag)
     }
 
     const handleSaveEdit = (e) => {
         e.preventDefault()
 
-        editCategories({
-            id: theCategory.id,
-            label: newCategory.label
+        editTags({
+            id: tag.id,
+            label: newTag.label
         }).then(() =>{
-           history.push('/categories')
+           history.push('/tags')
         })
     }
 
     return (
-        <div className='category_edit'>
-            <form className='category_edit_form'>
+        <div className='tag_edit'>
+            <form className='tag_edit_form'>
                 <fieldset>
-                    <div className="category_edit_form_group">
-                            <label htmlFor="name">Category Name: </label>
+                    <div className="tag_edit_form_group">
+                            <label htmlFor="name">Tag Name: </label>
                             <input type="text" name="label" required autoFocus className="form-control"
-                                placeholder="Category label"
-                                defaultValue={theCategory.label}
+                                placeholder="Tag label"
+                                defaultValue={tag.label}
                                 onChange={handleControlledInputChange}/>
                     </div>
                 </fieldset>
             </form>
-            <button className='category_edit--save' onClick={handleSaveEdit}>Save</button>
-            <button className='category_edit--cancel' onClick={() => {history.push('/categories')}}>Cancel</button>
+            <button className='tag_edit--save' onClick={handleSaveEdit}>Save</button>
+            <button className='tag_edit--cancel' onClick={() => {history.push('/tags')}}>Cancel</button>
         </div>
     )
 }

@@ -36,7 +36,7 @@ export const TagList = () => {
                         <li>
                           {tag.label}
                           <button className='tags_edit' 
-                          onClick={() => {history.push(`/tags/edit/${tag.id}`)}}>Edit</button>
+                          onClick={() => {history.push(`/tags/edit/${tag.id}`)}}>Edit Tag</button>
                           <button onClick={() => {handleDelete(tag.id)}}>Delete Tag</button>
                         </li>
                     )
