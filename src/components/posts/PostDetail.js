@@ -1,7 +1,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { getPosts } from "./PostManager"
+import { getPosts, editPost, deletePost } from "./PostManager"
 
 
 export const PostDetail = () => {
@@ -26,6 +26,9 @@ export const PostDetail = () => {
             <img src={post.image_url} alt='post_image' className='post_detail_title'/>
             <p className='post_detail_date'>Posted on {post.publication_date}</p>
             <p className='post_detail_user'>Posted by user {post.user.username}</p>
+
+            <button className="post_edit_button" onClick={editPost}>Edit</button>
+            <button className="post_edit_button" onClick={deletePost}>Delete</button>
         </div>
     )
 }
