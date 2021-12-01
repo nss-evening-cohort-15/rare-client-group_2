@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import  {getComments} from "./CommentManager";
 
-export const CommentList = () => {
+export const CommentList = ({postId}) => {
   const [ comments, setComments] = useState([])
+  const [ theComments, setTheComments] = useState([])
   const history = useHistory()
 
   useEffect(() => {
     getComments().then((data)=> setComments((data)))
   }, [])
 
+  useEffect(() => {
+    const relatedComments = comments.filter(comment => comment.post_id === postId )
+    setTheComments(relatedComments)
+  },[comments, postId])
 
 
   return(
     <div>
       <h2>Comments</h2>
-      <button onClick={() => history.push('/comments/create')}>Create Comment</button>
-      <article>
-        {
-          comments.map(comment => {
+      <ul>
+        { 
+        theComments.length > 0?
+          theComments.map(comment => {
             return <section key={comment.id}>
-              <ul>
-                <Link to={`/comments/${comment.id}`}>{comment.content}</Link><br/>
-              </ul>
+              <li>
+                <p>{comment.content}</p>
+              </li>
             </section>
-          })
+          }):""
         }
-      </article>
+      </ul>
       <button>Add Comment</button>
     </div>
   )
