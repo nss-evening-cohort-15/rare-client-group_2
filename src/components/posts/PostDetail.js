@@ -1,8 +1,13 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+<<<<<<< HEAD
 import { useHistory } from 'react-router-dom'
 import { getPosts, editPost, deletePost } from "./PostManager"
+=======
+import { getPosts } from "./PostManager"
+import { CommentList } from "../comments/CommentList"
+>>>>>>> main
 
 
 export const PostDetail = () => {
@@ -52,6 +57,9 @@ export const PostDetail = () => {
                 })
                 }
             </ul>
+             <div className='post_detail_comments'>
+                <CommentList postId = {parseInt(postId)}/>
+            </div>
         </div>
     )
 }

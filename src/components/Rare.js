@@ -6,7 +6,6 @@ import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 
 
-
 export const Rare = () => {
     const history = useHistory()
         return(
