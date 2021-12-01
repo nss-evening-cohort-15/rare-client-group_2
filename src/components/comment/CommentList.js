@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react"
-import { getComments } from "../comment/CommentManager";
-
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import  {getComments} from "./CommentManager";
 
 export const CommentList = () => {
-    const [ comments, setComments ] = useState([])
-    const [ users, getUsers, setUsers ] = useState([])
+  const [ comments, setComments] = useState([])
+  const history = useHistory()
 
-    useEffect(() => {
-        getComments().then(commentsData => setComments(commentsData))
-        getUsers().then(usersData => setUsers(usersData))
-    }, [])
+  useEffect(() => {
+    getComments().then(commentsData => setComments(commentsData))
+  }, [])
 
-    return (
-        <div style={{ margin: "0rem 3rem"}}>
-            <h1>Comments</h1>
-            <article className="comments">
-                {
-                    comments.map(comment => {
-                        users.comments = comments.filter(c => comment.id === c.user_id) || []
-                        return <section key={comment.id} className="comment">
-                            <h2>{comment.post_id}</h2>
-                            <div>{comment.author_id}</div>
-                            <div>{comment.text}</div>
-
-                            { comment.users && comment.users.map(c => <div key={`comment--${c.id}`}>{c.post_id} ({c.author_id})</div>)}
-                        </section>
-                    })
-                }
-            </article>
-        </div>
-    )
+  return(
+    <div>
+      <h2>Comments</h2>
+      <article>
+        {
+          comments.map(comment => {
+            return <section key={comment.id}>
+              <ul>
+                <Link to={`/comments/${comment.id}`}>{comment.content}</Link><br/>
+              </ul>
+            </section>
+          })
+        }
+      </article>
+      <button>Add Comment</button>
+    </div>
+  )
 }

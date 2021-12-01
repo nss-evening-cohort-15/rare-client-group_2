@@ -4,7 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-import { CommentDetail } from "./comment/CommentDetail"
+import { CommentList } from "./comment/CommentList"
 import { CommentForm } from "./comment/CommentForm"
 
 
@@ -17,7 +17,7 @@ export const Rare = () => {
                 return <>
                     <NavBar />
                     <CommentForm />
-                    <CommentDetail />
+                    <CommentList />
                     <ApplicationViews />
                 </>
             } else {

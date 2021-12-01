@@ -1,76 +1,65 @@
 import React, { useState, useEffect } from "react"
-import { createNewComment } from "./CommentManager"
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory } from "react-router"
+import { getComments, editComment, deleteComment, createNewComment } from "./CommentManager"
 
 export const CommentForm = () => {
-   
-    const [ isLoading, setIsLoading ] = useState(false);
-    const [user, getComments, addComment, setUser] = useState({});
-
-    const [comment, setComment ] = useState({
-        post_id: 2,
-        author_id: 1,
-        content: "",
-        created_on: null,
-    });
-    const {commentId} = useParams();
     const history = useHistory()
     
+    const [comments, setComments ] = useState([])
+    const [comment, setComment] = useState([])
+    const [theComment, setTheComment] = useState({comment: ''})
+    
+
+    const { commentId } = useParams()
 
     useEffect(() => {
-        getComments()
-      }, [])
+        getComments().then((data) => setComments(data))
+    }, [])
+
+    useEffect(() => {
+        const theComment = comments.find(comment=> comment.id === parseInt(commentId)) || {content: ''}
+        setTheComment(theComment)
+    }, [comments, commentId])
 
 
     const handleControlledInputChange = (event) => {
-
         const newComment = { ...comment }
-
         newComment[event.target.id] = event.target.value
-
         setComment(newComment)
     }
 
-    const createNewComment = (event) => {
-        setIsLoading(false)
-        if (!comment === 0 || !comment === 0) {
-
-            window.alert("Create New Comment")
-        }   
-            else {
-                // POST
-                const newComment = {
-                    post_id: comment.post_id,
-                    author_id: comment.author_id,
-                    content: comment.text,
-                    created_on: Date.now()
-                }
-
-                createNewComment(newComment)
-                    .then(() => {
-                        history.push('/comments')
-                        setIsLoading(false)
-                    })
-            
-        }
+}
+    const handleDelete = (id) => {
+        deleteComment(id)
+        .then(() => {
+        const remainingComments = comments.filter( comment => comment.id !== id )
+        setComments(remainingComments)
+        })
     }
 
     return (
-        <form className="comment">
-            <h1 className="comment_title">Comments</h1>
-            
-            <fieldset className="comment__form">
-          <label htmlFor="text">
-              <input type="text" id="text" required autoFocus className="form-control" Textarea
-              placeholder="type comment here" style= {{ minHeight:50}} value={comment.text} 
-              onChange={handleControlledInputChange} />
-              </label>
-          </fieldset>
-          <button className="btn btn-primary" 
-             disabled={isLoading}
-             onClick={event => createNewComment(event)}>
-           {commentId ? <>Save Comment</> : <>Add Comment</>}
-           </button>
-          </form>
+        <>
+        <div className='comment'>
+            <form className='comment_form'>
+                <fieldset>
+                    <div className="comment_form_group">
+                            <label htmlFor="comment">Comment: </label>
+                            <input type="text" name="label" required autoFocus className="form-control"
+                                placeholder="add comment here"
+                                defaultValue={comment.content}
+                                onChange={handleControlledInputChange}/>
+                    </div>
+                    <button type="submit"
+         onClick={event => { event.preventDefault()
+                            handleSaveComment()
+                            }}
+                            className="btn btn-primary" >
+       {commentId ? <>Save Comment</> : <>Add Comment</>}
+       </button>
+                
+                </fieldset>
+            </form>
+            <button className="delete__button" onClick={() => handleDelete(comment.id)}>Delete</button>
+        </div>
+        </>
     )
-            }
