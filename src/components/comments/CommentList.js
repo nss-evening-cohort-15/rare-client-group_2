@@ -7,12 +7,15 @@ export const CommentList = () => {
   const history = useHistory()
 
   useEffect(() => {
-    getComments().then(commentsData => setComments(commentsData))
+    getComments().then((data)=> setComments((data)))
   }, [])
+
+
 
   return(
     <div>
       <h2>Comments</h2>
+      <button onClick={() => history.push('/comments/create')}>Create Comment</button>
       <article>
         {
           comments.map(comment => {
