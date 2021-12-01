@@ -20,6 +20,14 @@ export const PostDetail = () => {
         setPost(thePost)
     }, [postId, posts])
 
+    const handleDelete = (id) => {
+        deletePost(id)
+        .then(() => {
+            const remainingPosts = posts.filter( post => post.id !== id )
+            setPosts(remainingPosts)
+        })
+    }
+
     return (
         <div className='post_detail'>
             <h3 className='post_detail_title'>{post.title}</h3>
@@ -27,8 +35,9 @@ export const PostDetail = () => {
             <p className='post_detail_date'>Posted on {post.publication_date}</p>
             <p className='post_detail_user'>Posted by user {post.user.username}</p>
 
-            <button className="post_edit_button" onClick={editPost}>Edit</button>
-            <button className="post_edit_button" onClick={deletePost}>Delete</button>
+            {/* <button className='post_edit' 
+            onClick={() => {history.push(`/posts/edit/${post.id}`)}}>Edit</button> */}
+            <button onClick={() => {handleDelete(post.id)}}>Delete Post</button>
         </div>
     )
 }
