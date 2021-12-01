@@ -30,3 +30,10 @@ export const editPost = post => {
   })
       .then(getPosts)
 }
+
+export const deletePost = postId => {
+  return fetch(`http://localhost:8088/posts/${postId}`, {
+      method: "DELETE"
+  })
+      .then(getPosts)
+}
