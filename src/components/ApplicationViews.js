@@ -5,6 +5,7 @@ import { CategoryCreate } from "./categories/CategoryCreate"
 import { CategoryForm } from "./categories/CategoryForm"
 import { PostList } from "./posts/PostList"
 import { PostDetail } from './posts/PostDetail'
+import { PostForm } from "./posts/PostForm"
 
 export const ApplicationViews = () => {
     return <>
@@ -25,8 +26,13 @@ export const ApplicationViews = () => {
                 <CategoryForm />
             </Route>
 
+
             <Route exact path='/'>
                 <PostList />
+            </Route>
+
+            <Route path='/posts/create'>
+                <PostForm />
             </Route>
 
             <Route exact path='/posts'>
@@ -37,6 +43,7 @@ export const ApplicationViews = () => {
                 <PostDetail />
             </Route>
             
+
         </main>
     </>
 }
