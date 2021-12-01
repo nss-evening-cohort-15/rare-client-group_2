@@ -4,7 +4,7 @@ import  {getPosts} from "./PostManager";
 
 export const PostList = () => {
   const [ posts, setPosts] = useState([])
-  // const history = useHistory()
+  const history = useHistory()
 
   useEffect(() => {
     getPosts().then(postsData => setPosts(postsData))
@@ -24,7 +24,7 @@ export const PostList = () => {
           })
         }
       </article>
-      <button>Random Button</button>
+      <button onClick={() => history.push("/posts/create")}>Create Post</button>
     </div>
   )
 }
