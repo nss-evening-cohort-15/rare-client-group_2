@@ -11,6 +11,7 @@ import { TagForm } from "./tags/TagForm"
 import { TagDetail } from "./tags/TagDetail"
 import { MyPosts } from './posts/MyPosts'
 
+
 export const ApplicationViews = () => {
     return <>
         <main style={{

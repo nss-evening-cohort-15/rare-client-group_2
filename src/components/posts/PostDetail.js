@@ -2,7 +2,7 @@ import React from "react"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { getPosts } from "./PostManager"
-// import { CommentList } from "./comments"
+import { CommentList } from "../comments/CommentList"
 
 
 export const PostDetail = () => {
@@ -27,9 +27,9 @@ export const PostDetail = () => {
             <img src={post.image_url} alt='post_image' className='post_detail_img'/>
             <p className='post_detail_date'>Posted on {post.publication_date}</p>
             <p className='post_detail_user'>Posted by user {post.user.username}</p>
-             {/* <div className='post_detail_comments'>
+             <div className='post_detail_comments'>
                 <CommentList postId = {parseInt(postId)}/>
-            </div> */}
+            </div>
         </div>
     )
 }
