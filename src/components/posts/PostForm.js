@@ -43,7 +43,7 @@ export const PostForm = () => {
           // approved: post.approved
           user_id: parseInt(localStorage.getItem("rare_user_id"))
         })
-          .then (() => history.push("posts"))
+          .then (() => history.push("/posts"))
           
       } else {
         addPost({
@@ -56,7 +56,7 @@ export const PostForm = () => {
           user_id: parseInt(localStorage.getItem("rare_user_id"))
 
         })
-          .then (() => history.push("posts"))
+          .then (() => history.push("/posts"))
       }
     }
   }
