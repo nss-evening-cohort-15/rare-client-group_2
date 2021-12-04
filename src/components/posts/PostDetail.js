@@ -1,6 +1,6 @@
 import React from "react"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router"
+import { useParams, useHistory } from "react-router"
 import { getPosts } from "./PostManager"
 import { CommentList } from "../comments/CommentList"
 
@@ -10,6 +10,7 @@ export const PostDetail = () => {
     const [posts, setPosts] = useState([])
     const [post, setPost] = useState({user:{username:''}})
     const {postId} = useParams()
+    const history = useHistory()
 
     useEffect(() => {
         getPosts().then((data) => {setPosts(data)})
@@ -30,6 +31,8 @@ export const PostDetail = () => {
              <div className='post_detail_comments'>
                 <CommentList postId = {parseInt(postId)}/>
             </div>
+            <button onClick={() => {
+                history.push(`/posts/edit/${post.id}`)}}>Edit</button>
         </div>
     )
 }

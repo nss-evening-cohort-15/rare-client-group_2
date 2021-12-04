@@ -21,6 +21,7 @@ export const PostForm = () => {
     if (editMode) {
       getPostById(postId).then((res) => {
         setPost(res)
+        console.warn('postId',postId)
       })
     }
     getCategories().then(categoriesData => setCategories(categoriesData))
@@ -36,11 +37,11 @@ export const PostForm = () => {
         editPost({
           id: post.id,
           title: post.title,
-          category_id: category_id,
-          // publication_date: Date
+          category_id: post.category_id,
+          publication_date: post.publication_date,
           image_url: post.image_url,
           content: post.content,
-          // approved: post.approved
+          approved: post.approved,
           user_id: parseInt(localStorage.getItem("rare_user_id"))
         })
           .then (() => history.push("/posts"))
